@@ -27,6 +27,22 @@ localStorage.setItem("selectedSeats",JSON.stringify(seatsIndex));
     total.innerText = selectedSeatsCount *  Price ;
 
 }
+
+const populateUI = () => {
+  const selectedSeats = JSON.parse(localStorage.getItem("selectedSeats"))
+  if(selectedSeats !== null && selectedSeats.length > 0 ){
+    seats.forEach((seat , index) => {
+      if(selectedSeats.indexOf(index > - 1)){
+        seat.classList.add("selected");
+      }
+     })
+  }
+  const selectedMovieIndex = localStorage.getItem("selectedMovieIndex");
+  if (selectedMovieIndex !== null) {
+    movieSelect.selectedIndex = selectedMovieIndex;
+  }
+}
+
 movieSelect.addEventListener("change", e => {
     Price = +e.target.value;
     setMovieData(e.target.selectedIndex,e.target.value);
@@ -44,3 +60,4 @@ container.addEventListener("click", (e) => {
   }
 });
 
+updateSelectedCount();
